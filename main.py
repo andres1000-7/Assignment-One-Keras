@@ -3,15 +3,14 @@ import matplotlib.pyplot as plt
 import keras
 from keras.datasets import cifar100
 from keras.models import Sequential
-from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+from keras.layers.core import Dense, Dropout, Flatten
+from keras.layers import Conv2D, MaxPooling2D
 from keras.utils import to_categorical
 from keras import backend as K
 
-plt.rcParams['figure.figsize'] = (7,7) # Make the figures a bit bigger
-
 batch_size = 128
 num_classes = 100
-epochs = 3
+epochs = 20
 
 # Load the CIFAR-100 dataset
 (x_train, y_train), (x_test, y_test) = cifar100.load_data()
@@ -39,8 +38,8 @@ model.add(Dropout(0.5))
 model.add(Dense(num_classes, activation='softmax'))
 
 # Compile the model
-model.compile(loss=keras.losses.categorical_crossentropy,
-              optimizer=keras.optimizers.Adadelta(),
+model.compile(loss='categorical_crossentropy',
+              optimizer='Adadelta',
               metrics=['accuracy'])
 
 # Train the model
